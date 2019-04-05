@@ -23,6 +23,7 @@ public struct Platform: Encodable {
     public static let tvOS: Platform = Platform(name: "tvos")
     public static let watchOS: Platform = Platform(name: "watchos")
     public static let linux: Platform = Platform(name: "linux")
+    public static let baremetal: Platform = Platform(name: "baremetal")
 }
 
 /// Represents a platform supported by the package.
@@ -86,6 +87,11 @@ public struct SupportedPlatform: Encodable {
     /// The version string must be a series of 2 or 3 dot-separated integers, for example "2.0" or "2.0.1".
     public static func watchOS(_ versionString: String) -> SupportedPlatform {
         return SupportedPlatform(platform: .watchOS, version: SupportedPlatform.WatchOSVersion(versionString).version)
+    }
+
+    /// The BareMetal platform.
+    public static func baremetal() -> SupportedPlatform {
+        return SupportedPlatform(platform: .baremetal)
     }
 }
 
