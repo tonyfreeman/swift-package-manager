@@ -37,6 +37,8 @@ public struct Triple {
         case s390x
         case aarch64
         case armv7
+        case thumbv7m
+        case thumbv7em
         case arm
     }
 
@@ -50,18 +52,21 @@ public struct Triple {
         case macOS = "macosx"
         case linux
         case windows
+        case none
 
         fileprivate static let allKnown:[OS] = [
             .darwin,
             .macOS,
             .linux,
-            .windows
+            .windows,
+            .none
         ]
     }
 
     public enum ABI: String {
         case unknown
         case android = "androideabi"
+        case eabi
     }
 
     public init(_ string: String) throws {
@@ -158,7 +163,7 @@ extension Triple {
         switch os {
         case .darwin, .macOS:
             return ".dylib"
-        case .linux:
+        case .linux, .none:
             return ".so"
         case .windows:
             return ".dll"
