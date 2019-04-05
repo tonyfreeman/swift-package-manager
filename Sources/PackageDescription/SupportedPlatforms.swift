@@ -41,6 +41,9 @@ public struct Platform: Encodable {
     /// The Android platform
     @available(_PackageDescription, introduced: 5.2)
     public static let android: Platform = Platform(name: "android")
+
+    // The BareMetal platform
+    public static let baremetal: Platform = Platform(name: "baremetal")
 }
 
 /// A platform that the Swift package supports.
@@ -156,6 +159,11 @@ public struct SupportedPlatform: Encodable {
     /// - Parameter versionString: The minimum deployment target as a string representation of two or three dot-separated integers, such as `2.0.1`.
     public static func watchOS(_ versionString: String) -> SupportedPlatform {
         return SupportedPlatform(platform: .watchOS, version: SupportedPlatform.WatchOSVersion(string: versionString).version)
+    }
+
+    /// The BareMetal platform.
+    public static func baremetal() -> SupportedPlatform {
+        return SupportedPlatform(platform: .baremetal)
     }
 }
 

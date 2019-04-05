@@ -37,6 +37,8 @@ public struct Triple: Encodable {
         case s390x
         case aarch64
         case armv7
+        case thumbv7m
+        case thumbv7em
         case arm
     }
 
@@ -50,18 +52,21 @@ public struct Triple: Encodable {
         case macOS = "macosx"
         case linux
         case windows
+        case none
 
         fileprivate static let allKnown:[OS] = [
             .darwin,
             .macOS,
             .linux,
-            .windows
+            .windows,
+            .none
         ]
     }
 
     public enum ABI: String, Encodable {
         case unknown
         case android
+        case eabi
     }
 
     public init(_ string: String) throws {
@@ -181,7 +186,7 @@ extension Triple {
         switch os {
         case .darwin, .macOS:
             return ".dylib"
-        case .linux:
+        case .linux, .none:
             return ".so"
         case .windows:
             return ".dll"
@@ -193,6 +198,8 @@ extension Triple {
       case .darwin, .macOS:
         return ""
       case .linux:
+        return ""
+      case .none:
         return ""
       case .windows:
         return ".exe"
