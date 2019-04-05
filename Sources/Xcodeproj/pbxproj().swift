@@ -243,7 +243,12 @@ func xcodeProject(
 
         // No existing group, so start by making sure we have the parent.  Note
         // that we don't pass along any custom name for any parent groups.
-        let parentGroup = makeGroup(for: path.parentDirectory)
+        let parentGroup: Xcode.Group
+        if path.parentDirectory < sourceRootDir {
+            parentGroup = project.mainGroup
+        } else {
+            parentGroup = makeGroup(for: path.parentDirectory)
+        }
 
         // Now we have a parent, so we can create a group, optionally using the
         // custom name we were given.
