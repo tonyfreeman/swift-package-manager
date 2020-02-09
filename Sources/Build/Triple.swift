@@ -67,6 +67,7 @@ public struct Triple {
         case unknown
         case android = "androideabi"
         case eabi
+        case eabihf
     }
 
     public init(_ string: String) throws {
