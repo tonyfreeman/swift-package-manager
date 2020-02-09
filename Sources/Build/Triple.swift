@@ -67,6 +67,7 @@ public struct Triple: Encodable {
         case unknown
         case android
         case eabi
+        case eabihf
     }
 
     public init(_ string: String) throws {
