@@ -265,7 +265,8 @@ public final class LLBuildManifestGenerator {
                 outputs: [target.wrappedModuleOutputPath.pathString],
                 args: [target.buildParameters.toolchain.swiftCompiler.pathString,
                        "-modulewrap", target.moduleOutputPath.pathString, "-o",
-                       target.wrappedModuleOutputPath.pathString],
+                       target.wrappedModuleOutputPath.pathString,
+                       "-target", target.buildParameters.triple.tripleString],
                 allowMissingInputs: false)
             buildTarget.cmds.insert(Command(name: target.wrappedModuleOutputPath.pathString, tool: modulewrapTool))
         }
